@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Antes de utilizar la IA, hazte estas preguntas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ufv-bg:#ffffff; --ufv-text:#001a33; --ufv-muted:#4a6580;
+  --ufv-primary:#003865; --ufv-secondary:#001a33; --ufv-accent:#cf2359; --ufv-accent-2:#b01d4c;
+  --ufv-sky:#649eff; --ufv-line:#e2e8f0; --ufv-soft:#eef3fa; --ufv-gray:#f2f3f5;
+  --font-body:"Arimo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-title:"Playfair Display",Georgia,serif; --font-slab:"Roboto Slab",Georgia,serif;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ufv-bg); color:var(--ufv-text); font-family:var(--font-body);
+  font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased}
+.wrap{max-width:900px; margin:0 auto; padding:40px 24px 56px}
+.eyebrow{font-family:var(--font-slab); text-transform:uppercase; letter-spacing:.12em;
+  font-size:1.04rem; color:var(--ufv-accent); font-weight:600; margin:0 0 .6rem}
+h1{font-family:var(--font-title); font-weight:500; color:var(--ufv-primary);
+  font-size:clamp(1.8rem,3.6vw,2.5rem); line-height:1.12; margin:0 0 .4em; letter-spacing:-.01em}
+.lead{font-size:1.12rem; color:var(--ufv-muted); margin:0 0 30px}
+.small{font-size:.92rem; color:var(--ufv-muted)}
+
+/* Checklist */
+.checklist{background:#fff; border:1px solid var(--ufv-line); border-radius:var(--radius); padding:8px 8px 18px}
+.check-item{display:flex; gap:14px; align-items:flex-start; padding:18px; border-bottom:1px solid var(--ufv-line)}
+.check-item:last-of-type{border-bottom:none}
+.check-item input{width:22px; height:22px; margin-top:3px; accent-color:var(--ufv-primary); flex:none; cursor:pointer}
+.ci-dd{flex:1; min-width:0}
+.ci-dd > summary{list-style:none; cursor:pointer; position:relative; padding-right:26px; display:block}
+.ci-dd > summary::-webkit-details-marker{display:none}
+.ci-dd > summary::after{content:"+"; position:absolute; top:-2px; right:0; color:var(--ufv-accent);
+  font-family:var(--font-slab); font-size:1.3rem; line-height:1}
+.ci-dd[open] > summary::after{content:"\2013"}
+.ci-dd > summary .q{font-weight:700; font-family:var(--font-slab); color:var(--ufv-primary); transition:color .18s}
+.ci-dd[open] > summary .q{color:var(--ufv-accent)}
+.ci-check:checked + .ci-dd > summary{color:var(--ufv-muted)}
+.ci-check:checked + .ci-dd > summary .q{text-decoration:line-through; color:var(--ufv-muted)}
+.ci-body{margin-top:12px}
+.ci-body ul{padding-left:20px; margin:0}
+.ci-body li{margin-bottom:8px}
+.check-actions{display:flex; gap:10px; flex-wrap:wrap; padding:16px 16px 0}
+
+/* Tarjetas escenarios */
+.grid{display:grid; gap:16px}
+.cols-3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--ufv-gray); border-radius:12px; padding:18px}
+.card.small{font-size:.9rem; color:var(--ufv-text)}
+.card.small b{color:var(--ufv-primary)}
+@media (max-width:720px){ .cols-3{grid-template-columns:1fr} }
+
+/* Botones */
+.btn{display:inline-block; font-family:var(--font-body); font-weight:500; font-size:.82rem;
+  padding:9px 18px; border-radius:999px; border:1.5px solid transparent; cursor:pointer;
+  background:var(--ufv-primary); color:#fff; transition:.18s}
+.btn:hover{background:var(--ufv-secondary)}
+.btn.outline{background:transparent; color:var(--ufv-primary); border-color:var(--ufv-primary)}
+.btn.outline:hover{background:var(--ufv-soft)}
+
+/* Toast */
+.toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:var(--ufv-primary); color:#fff; padding:12px 20px; border-radius:10px; opacity:0;
+  pointer-events:none; transition:.25s; z-index:99; font-size:.9rem}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--ufv-accent); outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Preguntas para la reflexión docente</p>
+  <h1>Antes de utilizar la IA, hazte estas preguntas</h1>
+  <p class="lead">Antes de rediseñar una actividad o introducir la IA, conviene revisar qué aprendizajes se quieren favorecer, qué evidencias se necesitan y qué papel debe desempeñar el alumno.</p>
+
+  <div class="checklist" id="checklist">
+    <div class="check-item">
+      <input type="checkbox" id="q1" class="ci-check">
+      <details class="ci-dd">
+        <summary><span class="q">Propósito.</span> ¿Qué resultado de aprendizaje quiero comprobar o acompañar?</summary>
+        <div class="ci-body">
+          <p class="small" style="margin:0;">Acude a la guía docente de la asignatura y selecciona el resultado de aprendizaje que quieres trabajar y evaluar. Después, diseña la actividad que permita comprobar que el alumno lo alcanza.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="q2" class="ci-check">
+      <details class="ci-dd">
+        <summary><span class="q">Delegación.</span> ¿Qué parte del aprendizaje no debería delegarse nunca en la IA?</summary>
+        <div class="ci-body">
+          <ul class="small" style="margin:0;">
+            <li><b>Metacognición y aprendizaje autorregulado:</b> la IA puede ayudar a resolver una tarea, pero no debe sustituir la planificación, el seguimiento ni la reflexión del alumnado sobre qué está aprendiendo, qué dificultades encuentra y cómo puede mejorar.</li>
+            <li><b>Juicio evaluativo:</b> valorar la calidad de una respuesta, contrastar evidencias, detectar errores, revisar el propio trabajo y justificar por qué una solución es mejor que otra son procesos que el estudiante debe seguir realizando para desarrollar criterio y juicio profesional.</li>
+            <li><b>Pensamiento crítico, curiosidad e imaginación:</b> la IA puede generar ideas e información, pero formular preguntas relevantes, cuestionar las respuestas, problematizar, explorar alternativas y construir explicaciones propias debe seguir siendo responsabilidad del alumnado.</li>
+            <li><b>Dimensión humana del aprendizaje:</b> la conversación, la argumentación, el trabajo colaborativo, la búsqueda común de significados y la comunicación con los otros son experiencias educativas que la IA puede apoyar, pero no reemplazar.</li>
+            <li><b>Responsabilidad ética y autonomía de actuación:</b> las decisiones finales sobre qué utilizar, qué sostener, qué entregar y cómo reconocer la ayuda recibida corresponden siempre al estudiante. La IA puede asesorar, pero no asumir la responsabilidad académica ni profesional, ni sustituir la agencia del alumnado.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="q3" class="ci-check">
+      <details class="ci-dd">
+        <summary><span class="q">Robustez.</span> ¿Alguna tarea podría hacerla total o parcialmente una IA?</summary>
+        <div class="ci-body">
+          <p class="small" style="margin:0;">Prueba el enunciado de la tarea con una herramienta de IA. Si la respuesta se aproxima al resultado esperado, revisa la actividad para incorporar decisiones, justificaciones, contexto, datos propios, reflexión o evidencias del proceso seguido por el estudiante. Recuerda que, aunque una tarea pueda ser realizada con IA, tú tienes la última palabra para mantenerla o no; pero si la mantienes, conviene que seas claro sobre por qué y qué esperas de ellos.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="q4" class="ci-check">
+      <details class="ci-dd">
+        <summary><span class="q">Evidencias.</span> ¿Cómo comprobaré el proceso de aprendizaje, la comprensión y la transferencia?</summary>
+        <div class="ci-body">
+          <p class="small" style="margin:0 0 8px;"><b>Proceso de aprendizaje.</b> ¿Qué evidencias mostrarán cómo ha aprendido el estudiante? Incorpora evidencias que permitan observar cómo construye su trabajo: planificación, borradores, revisiones, decisiones justificadas, iteraciones y reflexión sobre los cambios realizados.</p>
+          <p class="small" style="margin:0;"><b>Comprensión y transferencia.</b> ¿Qué evidencias demostrarán que comprende, puede justificar sus decisiones y aplicar lo aprendido en nuevos contextos? Diseña oportunidades para que explique sus decisiones, justifique sus elecciones, contraste alternativas y detecte las limitaciones de la IA. Comprueba también hasta qué punto es capaz de transferir lo aprendido a situaciones nuevas.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="q5" class="ci-check">
+      <details class="ci-dd">
+        <summary><span class="q">Decisión docente.</span> ¿Esta actividad debe ser sin IA, con IA guiada por el profesor o rediseñada ante la IA?</summary>
+        <div class="ci-body">
+          <p class="small" style="margin:0 0 12px;">En lugar de centrarte en la IA, parte de estas tres preguntas: <b>¿qué quiero que aprenda el estudiante? ¿qué papel puede desempeñar la IA? ¿qué implica para el diseño de la actividad?</b></p>
+          <div class="grid cols-3" style="margin:0;">
+            <div class="card small"><b>Escenario A · Sin IA</b><br>Cuando el objetivo es desarrollar o comprobar aprendizajes que el estudiante debe realizar de forma autónoma —conocimientos fundamentales, habilidades clave, comprensión, razonamiento básico o competencias que servirán de base para aprendizajes posteriores—. Aquí la IA podría sustituir procesos cognitivos que el alumnado necesita desarrollar y ejercitar.</div>
+            <div class="card small"><b>Escenario B · Con IA guiada</b><br>Cuando la IA puede actuar como herramienta de apoyo sin sustituir el proceso cognitivo principal: explorar ideas, ofrecer retroalimentación, mejorar la expresión escrita, traducir, sintetizar información o generar ejemplos, siempre bajo orientaciones claras del docente y manteniendo el protagonismo del estudiante.</div>
+            <div class="card small"><b>Escenario C · Rediseño ante la IA</b><br>Cuando la IA puede resolver una parte sustancial de la tarea y el producto final deja de ser evidencia suficiente del aprendizaje. Conviene rediseñar la actividad incorporando evidencias del proceso, decisiones justificadas, defensas orales, tareas contextualizadas, trabajo por etapas o situaciones auténticas que hagan visible el aprendizaje.</div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="check-item">
+      <input type="checkbox" id="q6" class="ci-check">
+      <details class="ci-dd">
+        <summary><span class="q">Decisión del alumno.</span> ¿Cómo ayudo a mis estudiantes a distinguir entre la inspiración, el apoyo de la IA y la sustitución del aprendizaje y el pensamiento?</summary>
+        <div class="ci-body">
+          <p class="small" style="margin:0 0 10px;">La mejor señal de que has aprendido no es que la IA haya producido un buen resultado, sino que tú puedas comprenderlo, explicarlo, defenderlo y volver a utilizarlo sin depender de ella.</p>
+          <p class="small" style="margin:0 0 8px;"><b>¿Entiendo realmente el resultado o solo lo reconozco cuando lo veo?</b> Si no puedo explicarlo con mis propias palabras o aplicarlo en una situación diferente, probablemente aún no lo he aprendido.</p>
+          <p class="small" style="margin:0 0 8px;"><b>¿Podría justificar y defender las decisiones tomadas en este trabajo?</b> Si no soy capaz de explicar por qué elegí una respuesta, un argumento o una solución, es posible que la IA haya pensado por mí.</p>
+          <p class="small" style="margin:0 0 8px;"><b>¿Podría rehacer las partes esenciales de esta tarea sin depender de la IA?</b> La IA puede ayudar durante el proceso, pero el aprendizaje implica poder reproducir y adaptar lo aprendido de forma autónoma.</p>
+          <p class="small" style="margin:0;"><b>¿He utilizado la IA para ampliar mi comprensión o para evitar el esfuerzo de comprender?</b> La IA debería ayudarme a pensar mejor, no a dejar de pensar.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="check-actions">
+      <button class="btn small" onclick="copyChecklist()">Copiar checklist</button>
+      <button class="btn outline small" onclick="resetChecklist()">Reiniciar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+let toastTimer;
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+function copyText(text){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>toast('Copiado al portapapeles')).catch(()=>fallbackCopy(text));
+  } else { fallbackCopy(text); }
+}
+function fallbackCopy(text){
+  const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta);
+  ta.select(); try{document.execCommand('copy'); toast('Copiado');}catch(e){toast('No se pudo copiar');}
+  document.body.removeChild(ta);
+}
+function copyChecklist(){
+  const items=[...document.querySelectorAll('#checklist .check-item')];
+  let txt="Antes de utilizar la IA, hazte estas preguntas\n\n";
+  items.forEach(it=>{ const cb=it.querySelector('input'); const q=it.querySelector('summary'); if(!cb||!q) return;
+    const label=q.innerText.replace(/\s+/g,' ').trim();
+    txt+=(cb.checked?"[x] ":"[ ] ")+label+"\n"; });
+  copyText(txt);
+}
+function resetChecklist(){ document.querySelectorAll('#checklist input[type=checkbox]').forEach(cb=>cb.checked=false); toast('Checklist reiniciado'); }
+</script>
+</body>
+</html>
